@@ -1,11 +1,15 @@
 import random
 import curses 
-from curses import textpad
 
 # initialized curses by returning a window object
-stdsrc = curses.initsrc()
+stdscr = curses.initscr()
+curses.noecho()
+curses.cbreak()
+
+stdscr.keypad(True)
+
 curses.curs_set(0)
-height, width = stdsrc.getmaxyx()
+height, width = stdscr.getmaxyx()
 # create a new window of a given size
 window = curses.newwin(height, width, 0, 0)
 window.keypad(1)
@@ -15,7 +19,7 @@ snk_x = width/4
 snk_y = height/2
 snake = [
     [snk_y, snk_x],
-    [snk_y, snk_x -1],
+    [snk_y, snk_x-1],
     [snk_y, snk_x-2]
 ]
 
@@ -32,15 +36,15 @@ while True:
         curses.endwin()
         quit()
 
-        new_head = [snake[0][0], snake [0][1]]
+        new_head = [snake[0][0], snake[0][1]]
 
         if key == curses.KEY_DOWN:
             new_head[0] += 1
-        if key == curses.KEY.UP:
+        if key == curses.KEY_UP:
             new_head[0] -= 1
         if key == curses.KEY_LEFT:
             new_head[1] -= 1
-        if key == curses.KEY.RIGHT:
+        if key == curses.KEY_RIGHT:
             new_head[1] += 1
 
         snake.insert(0, new_head)
@@ -50,7 +54,7 @@ while True:
             while food is None:
                 nf = [ random.randint(1, height-1), random.randint(1, width-1)]
                 food = nf if nf not in snake else None
-                window.addch(food[0], food[1], curses.ACS_PI)
+            window.addch(food[0], food[1], curses.ACS_PI)
         else:
             tail = snake.pop()
             window.addch(tail[0], tail[1], ' ')
