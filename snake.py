@@ -24,7 +24,7 @@ snake = [
 ]
 
 food = [height/2, width/2]
-window.addch(food[0], food[1], curses.ACS_PI)
+window.addch(int(food[0]), int(food[1]), curses.ACS_PI)
 
 key = curses.KEY_RIGHT
 
@@ -57,7 +57,7 @@ while True:
             window.addch(food[0], food[1], curses.ACS_PI)
         else:
             tail = snake.pop()
-            window.addch(tail[0], tail[1], ' ')
+            window.addch(int(tail[0]), int(tail[1]), ' ')
         
         window.addch(snake[0][0], snake[0][1], curses.ACS_CKBOARD)
     
