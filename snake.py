@@ -1,15 +1,16 @@
 import random
+
+# library to create window in the terminal
 import curses 
 
 # initialized curses by returning a window object
 stdscr = curses.initscr()
 curses.noecho()
 curses.cbreak()
-
 stdscr.keypad(True)
-
 curses.curs_set(0)
 height, width = stdscr.getmaxyx()
+
 # create a new window of a given size
 window = curses.newwin(height, width, 0, 0)
 window.keypad(1)
